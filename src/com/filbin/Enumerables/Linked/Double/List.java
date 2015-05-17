@@ -49,29 +49,36 @@ public class List<T> implements Enumerable<T> {
     @Override
     public void addLast(T element) {
         Node<T> current = head;
+
         while (current.hasNext()) {
             current = current.getNext();
         }
+
         current.setNext(new Node<T>(element, current, null));
         size++;
     }
 
     @Override
     public T getLast() {
-        Node<T> current = head;
-        while (current.hasNext()) {
-            current = current.getNext();
+        Node<T> last = head;
+
+        while (last.hasNext()) {
+            last = last.getNext();
         }
-        return current.data;
+
+        return last.data;
     }
 
     @Override
     public void removeLast() {
-        Node<T> current = head;
-        while (current.hasNext()) {
-            current = current.getNext();
+        Node<T> last = head;
+
+        while (last.hasNext()) {
+            last = last.getNext();
         }
-        current.getPrevious().setNext(null);
+
+        last.getPrevious().setNext(null);
+
         size--;
     }
 

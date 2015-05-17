@@ -20,7 +20,9 @@ public class LinkList<T> implements Enumerable<T> {
         if (this.head == null) {
             this.head = new Node<>(element, null);
         } else {
-            this.head = new Node<>(element, this.head);
+            Node<T> node = new Node<>(element, this.head);
+            node.next = this.head;
+            this.head = node;
         }
         this.size++;
     }
@@ -42,25 +44,26 @@ public class LinkList<T> implements Enumerable<T> {
     @Override
     public void addLast(T element) {
 
+        Node<T> lastNode = getLastNode();
+
+        lastNode.next = new Node<>(element, null);
+        this.size++;
+    }
+
+    private Node<T> getLastNode() {
         Node<T> current = head;
 
         while (current.next != null) {
             current = current.next;
         }
-
-        current.next = new Node<>(element, null);
-        this.size++;
+        return current;
     }
 
     @Override
     public T getLast() {
-        Node<T> next = this.head;
+        Node<T> lastNode = getLastNode();
 
-        while (next.next != null) {
-            next = next.next;
-        }
-
-        return next.data;
+        return lastNode.data;
     }
 
     @Override
@@ -70,8 +73,8 @@ public class LinkList<T> implements Enumerable<T> {
         Node<T> previous = null;
 
         while (current != null) {
-            current = current.next;
             previous = current;
+            current = current.next;
         }
 
         previous.next = null;

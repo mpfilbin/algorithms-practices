@@ -7,7 +7,7 @@ public class Binary<T extends Comparable<T>> {
 
     public void Add(T element) {
         if (isEmpty()) {
-            root = new Node<T>(null, null, element);
+            root = new Node<>(null, null, element);
         } else {
             addTo(root, element);
         }
@@ -16,15 +16,15 @@ public class Binary<T extends Comparable<T>> {
     }
 
     private void addTo(Node<T> node, T element) {
-        if (element.compareTo(node.getData()) < 0) {
+        if (element.compareTo(node.getData()) < 0) { // -1 if element is less than incoming node
             if (!node.hasLeft()) {
-                node.setLeft(new Node<T>(null, null, element));
+                node.setLeft(new Node<>(null, null, element));
             } else {
                 addTo(node.getLeft(), element);
             }
         } else {
             if (!node.hasRight()) {
-                node.setRight(new Node<T>(null, null, element));
+                node.setRight(new Node<>(null, null, element));
             } else {
                 addTo(node.getRight(), element);
             }
